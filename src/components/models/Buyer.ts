@@ -27,7 +27,7 @@ export class Buyer {
   }
 
   validate(): IBuyerErrors {
-    const errors: Partial<Record<keyof IBuyer, string>> = {};
+    const errors: IBuyerErrors = {};
 
     if (!this.payment) {
       errors.payment = "Не выбран способ оплаты";

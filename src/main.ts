@@ -74,12 +74,16 @@ buyer.clear();
 console.log("Покупатель: данные после очистки", buyer.getData());
 
 console.log("Покупатель: ошибки после очистки", buyer.validate());
-try {
-  const data = await communication.getAllItems();
+async function loadProducts() {
+  try {
+    const data = await communication.getAllItems();
 
-  catalog.setProducts(data.items);
+    catalog.setProducts(data.items);
 
-  console.log("Каталог с сервера:", catalog.getProducts());
-} catch (error) {
-  console.error("Ошибка при загрузке каталога:", error);
+    console.log("Каталог с сервера:", catalog.getProducts());
+  } catch (error) {
+    console.error("Ошибка при загрузке каталога:", error);
+  }
 }
+
+loadProducts();
