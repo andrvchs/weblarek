@@ -1,0 +1,18 @@
+import {
+  IApi,
+  IProductList,
+  IOrder,
+  IOrderCheck,
+} from "../../types";
+
+export class Communication {
+  constructor(private api: IApi) {}
+
+  getAllItems(): Promise<IProductList> {
+    return this.api.get<IProductList>("/product/");
+  }
+
+  sendOrder(order: IOrder): Promise<IOrderCheck> {
+    return this.api.post<IOrderCheck>("/order/", order);
+  }
+}

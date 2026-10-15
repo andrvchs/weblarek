@@ -3,6 +3,12 @@ import { Catalog } from "./components/models/Catalog";
 import { Basket } from "./components/models/Basket";
 import { Buyer } from "./components/models/Buyer";
 import { apiProducts } from "./utils/data";
+import { Api } from "./components/base/Api";
+import { API_URL } from "./utils/constants";
+import { Communication } from "./components/communication/communication";
+
+const api = new Api(API_URL);
+  const communication = new Communication(api);
 
 const catalog = new Catalog();
 
@@ -68,3 +74,12 @@ buyer.clear();
 console.log("Покупатель: данные после очистки", buyer.getData());
 
 console.log("Покупатель: ошибки после очистки", buyer.validate());
+try {
+  const data = await communication.getAllItems();
+
+  catalog.setProducts(data.items);
+
+  console.log("Каталог с сервера:", catalog.getProducts());
+} catch (error) {
+  console.error("Ошибка при загрузке каталога:", error);
+}

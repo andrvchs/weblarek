@@ -1,4 +1,4 @@
-import { IBuyer } from "../../types";
+import { IBuyer,IBuyerErrors } from "../../types";
 
 export class Buyer {
   private payment: IBuyer["payment"] = "";
@@ -26,22 +26,22 @@ export class Buyer {
     this.address = "";
   }
 
-  validate(): Partial<Record<keyof IBuyer, string>> {
+  validate(): IBuyerErrors {
     const errors: Partial<Record<keyof IBuyer, string>> = {};
 
     if (!this.payment) {
       errors.payment = "Не выбран способ оплаты";
     }
 
-    if (this.email) {
+    if (!this.email) {
       errors.email = "Укажите электронную почту";
     }
 
-    if (this.phone) {
+    if (!this.phone) {
       errors.phone = "Укажите номер телефона";
     }
 
-    if (this.address) {
+    if (!this.address) {
       errors.address = "Укажите адресс доставки";
     }
 

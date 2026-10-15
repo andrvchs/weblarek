@@ -21,3 +21,21 @@ export interface IBuyer {
   phone: string;
   address: string;
 }
+export interface IProductList {
+  total: number;
+  items: IProduct[];
+}
+
+export interface IOrderCheck {
+  id: string;
+  total: number;
+}
+
+export interface IOrder extends IBuyer {
+  total: number;
+  items: IProduct["id"][];
+}
+export interface IProductList {
+  items: IProduct[];
+}
+export type IBuyerErrors = Partial<Record<keyof IBuyer, string>>;
